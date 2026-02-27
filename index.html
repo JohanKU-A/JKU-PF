@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Portefølje – Arkitektstudent</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Enkelt, minimalistisk stil -->
+    <style>
+        :root {
+            --bg: #f5f5f5;
+            --bg-alt: #ffffff;
+            --text: #111111;
+            --muted: #777777;
+            --accent: #111111;
+            --border: #dddddd;
+            --max-width: 960px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-alt);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 0.95rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem 4rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Hero / introduksjon */
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: clamp(2.3rem, 3vw, 3.1rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text {
+            max-width: 32rem;
+            font-size: 0.98rem;
+        }
+
+        .hero-meta {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .hero-meta div {
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-meta span.label {
+            display: inline-block;
+            min-width: 5rem;
+        }
+
+        /* Prosjektgrid */
+
+        .section-title {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            padding: 1.25rem 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+        }
+
+        .project-title {
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--muted);
+            margin-bottom: 0.8rem;
+        }
+
+        .project-description {
+            font-size: 0.92rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-tags {
+            margin-top: 0.6rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .project-link {
+            font-size: 0.86rem;
+            margin-top: 0.8rem;
+        }
+
+        /* Om / tekstblokk */
+
+        .text-columns {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: 2.5rem;
+        }
+
+        .text-muted {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* Kontakt */
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .contact-list li {
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-label {
+            display: inline-block;
+            min-width: 5.2rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 1.25rem 1.25rem 1.8rem;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        footer .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        /* Responsiv tilpasning */
+
+        @media (max-width: 800px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .text-columns {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none; /* enkelt: ingen mobilmeny, bare enkel scroll */
+            }
+
+            .nav-container {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <div class="logo">ARKITEKTSTUDENT · PORTEFØLJE</div>
+        <nav>
+            <a href="#prosjekter">Prosjekter</a>
+            <a href="#om">Om</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero / introduksjon -->
+    <section class="hero" id="topp">
+        <div>
+            <div class="hero-subtitle">Arkitektur · Studio · Modell</div>
+            <h1 class="hero-title">
+                [Ditt navn]<br>
+                arkitektstudent
+            </h1>
+            <p class="hero-text">
+                Jeg er arkitektstudent med interesse for sammenhengen mellom landskap, materiale og
+                hverdagsliv. Her finner du et utvalg prosjekter fra studier, konkurranser og egne
+                undersøkelser.
+            </p>
+        </div>
+        <div class="hero-meta">
+            <div><span class="label">Basert i</span> Oslo / [by]</div>
+            <div><span class="label">Studie</span> Master i arkitektur, [skole]</div>
+            <div><span class="label">Fokus</span> Bolig, transformasjon, byrom</div>
+        </div>
+    </section>
+
+    <!-- Prosjekter -->
+    <section id="prosjekter">
+        <div class="section-title">Utvalgte prosjekter</div>
+        <div class="projects-grid">
+
+            <!-- Prosjekt 1 -->
+            <article class="project-card">
+                <div>
+                    <div class="project-meta">Studio · 2025</div>
+                    <h2 class="project-title">Bybolig i tre</h2>
+                    <p class="project-description">
+                        Boligprosjekt i et tett bykvartal med vekt på dagslys, deling av utearealer
+                        og fleksible planløsninger. Treverk som hovedmateriale både konstruktivt og
+                        i interiør.
+                    </p>
+                    <p class="project-tags">
+                        Trearkitektur · Bolig · Dagslys
+                    </p>
+                </div>
+                <div class="project-link">
+                    <!-- Bytt ut # med lenke til prosjekt-side eller PDF -->
+                    <a href="#" target="_blank" rel="noopener">
+                        Se prosjekt (PDF / bilder)
+                    </a>
+                </div>
+            </article>
+
+            <!-- Prosjekt 2 -->
+            <article class="project-card">
+                <div>
+                    <div class="project-meta">Konkurranse · 2024</div>
+                    <h2 class="project-title">Bibliotek ved elven</h2>
+                    <p class="project-description">
+                        Forslag til offentlig bibliotek som kobler sammen elverommet og byen.
+                        Trinnvise terrasser, robuste materialer og åpne planløsninger for ulike typer
+                        lesesoner.
+                    </p>
+                    <p class="project-tags">
+                        Offentlige bygg · Landskap · Struktur
+                    </p>
+                </div>
+                <div class="project-link">
+                    <a href="#" target="_blank" rel="noopener">
+                        Se prosjekt (PDF / modeller)
+                    </a>
+                </div>
+            </article>
+
+            <!-- Prosjekt 3 -->
+            <article class="project-card">
+                <div>
+                    <div class="project-meta">Eget prosjekt · 2023</div>
+                    <h2 class="project-title">Adaptiv transformasjon</h2>
+                    <p class="project-description">
+                        Studie av hvordan eldre industribygg kan transformeres til nye program uten
+                        å miste sin karakter. Fokus på struktur, lysinnslipp og robuste detaljer.
+                    </p>
+                    <p class="project-tags">
+                        Transformasjon · Eksisterende bygg · Modell
+                    </p>
+                </div>
+                <div class="project-link">
+                    <a href="#" target="_blank" rel="noopener">
+                        Se prosjekt (bilder / tegninger)
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Om -->
+    <section id="om">
+        <div class="section-title">Om</div>
+        <div class="text-columns">
+            <div class="text-muted">
+                Bakgrunn
+            </div>
+            <div>
+                <p>
+                    Jeg studerer arkitektur ved [skole] og er særlig interessert i hvordan små
+                    arkitektoniske valg kan ha stor innvirkning på hverdagen til brukerne. I
+                    prosjektene mine jobber jeg ofte med enkle volum, tydelige konstruksjoner og
+                    materialer som eldes godt.
+                </p>
+                <p>
+                    Erfaring inkluderer sommerjobb i [kontor], deltagelse i [workshop/kurs],
+                    og arbeid med både fysiske modeller og digitale verktøy som Rhino, Revit og
+                    Adobe-pakken.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt">
+        <div class="section-title">Kontakt</div>
+        <ul class="contact-list">
+            <li>
+                <span class="contact-label">E-post</span>
+                <a href="mailto:din.epost@eksempel.no">din.epost@eksempel.no</a>
+            </li>
+            <li>
+                <span class="contact-label">Telefon</span>
+                +47 000 00 000
+            </li>
+            <li>
+                <span class="contact-label">Portefølje</span>
+                <a href="#" target="_blank" rel="noopener">Last ned PDF</a>
+            </li>
+            <li>
+                <span class="contact-label">LinkedIn</span>
+                <a href="#" target="_blank" rel="noopener">linkedin.com/in/dittnavn</a>
+            </li>
+            <li>
+                <span class="contact-label">Instagram</span>
+                <a href="#" target="_blank" rel="noopener">@studio.dittnavn</a>
+            </li>
+        </ul>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div>© [Ditt navn] · Arkitektstudent</div>
+        <div>Nettside: statisk HTML/CSS · vert på egen server</div>
+    </div>
+</footer>
+
+</body>
+</html>
